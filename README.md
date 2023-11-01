@@ -1,5 +1,5 @@
 # Device-Care
-- This app has not finished yet. If you want improve it, you can fork it.
+- This application is not yet complete
 
 ## App features
 - All application of your device with usage time.
