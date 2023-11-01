@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Device Care</string>
+    <string name="apps">You can check your applications</string>
+    <string name="apps_desc">With this feature, you can check your apps: how long you use them every day and anything else you need to know. The app needs app usage permission for this.</string>
+    <string name="storage_cpu">You can check your device memory and processor</string>
+    <string name="storage_and_cpu">With this feature, you can get information about your device\'s memory and processor</string>
+    <string name="device_health">You can check the system information of the device </string>
+    <string name="device_health_desc">With this feature, you can get the device\'s system and other information</string>
+</resources>
