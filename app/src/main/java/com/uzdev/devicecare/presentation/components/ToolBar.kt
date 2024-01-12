@@ -1,4 +1,4 @@
-package com.uzdev.core.top
+package com.uzdev.devicecare.presentation.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.uzdev.core.top.ToolbarScreen
+import com.uzdev.devicecare.presentation.components.ToolbarScreen
 import com.uzdev.devicecare.R
 import com.uzdev.devicecare.domain.model.App
 import com.uzdev.devicecare.navigation.NavRoutes

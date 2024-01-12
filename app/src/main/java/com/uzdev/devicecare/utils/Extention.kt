@@ -1,4 +1,4 @@
-package com.uzdev.utils
+package com.uzdev.devicecare.utils
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat

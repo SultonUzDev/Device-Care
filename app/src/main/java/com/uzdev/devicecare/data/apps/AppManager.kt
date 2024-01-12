@@ -8,7 +8,7 @@ import android.content.pm.PackageManager
 import android.os.UserManager
 import com.uzdev.devicecare.data.details.AppInfo
 import com.uzdev.devicecare.domain.model.App
-import com.uzdev.utils.convertLongToTime
+import com.uzdev.devicecare.utils.convertLongToTime
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

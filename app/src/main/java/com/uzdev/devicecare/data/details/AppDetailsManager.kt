@@ -5,8 +5,8 @@ import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.pm.PackageManager
 import com.uzdev.devicecare.domain.model.AppUsageInfo
-import com.uzdev.utils.convertLongToTime
-import com.uzdev.utils.getDurationBreakdown
+import com.uzdev.devicecare.utils.convertLongToTime
+import com.uzdev.devicecare.utils.getDurationBreakdown
 
 class AppDetailsManager(private val context: Context) {
     private val usageStatsManager =

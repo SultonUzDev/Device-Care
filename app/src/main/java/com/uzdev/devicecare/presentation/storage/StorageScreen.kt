@@ -2,11 +2,9 @@ package com.uzdev.devicecare.presentation.storage
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
@@ -24,8 +22,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -40,7 +36,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavHostController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
-import com.uzdev.core.top.ToolbarScreen
+import com.uzdev.devicecare.presentation.components.ToolbarScreen
 import com.uzdev.devicecare.data.storage.StorageManager
 import com.uzdev.devicecare.theme.FirstTextColor
 import com.uzdev.devicecare.theme.MainBackColor

@@ -14,7 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Device Care"
 include ':app'
-include ':components'
-include ':domain'
-include ':data'
-include ':utils'

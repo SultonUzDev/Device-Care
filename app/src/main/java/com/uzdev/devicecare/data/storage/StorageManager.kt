@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Environment
-import com.uzdev.utils.getSpaceAsGb
+import com.uzdev.devicecare.utils.getSpaceAsGb
 import java.io.File
 
 class StorageManager(private val context: Context) {
