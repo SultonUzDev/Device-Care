@@ -1,12 +1,12 @@
 package com.uzdev.devicecare.presentation.apps
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,28 +25,26 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.uzdev.core.top.ToolbarScreen
 import com.uzdev.devicecare.R
-import com.uzdev.devicecare.data.apps.AppManager
 import com.uzdev.devicecare.domain.model.App
 import com.uzdev.devicecare.navigation.NavRoutes
 import com.uzdev.devicecare.theme.FirstTextColor
 import com.uzdev.devicecare.theme.MainBackColor
-import com.uzdev.devicecare.theme.SecondTextColor
 import com.uzdev.devicecare.theme.ThirdColor
 
 
 @Composable
-fun AppsScreen(navHostController: NavHostController) {
+fun AppsScreen(navHostController: NavHostController, appViewModel: AppViewModel = hiltViewModel()) {
 
     @SuppressLint("StaticFieldLeak")
     val context = LocalContext.current
 
 
-    val apps: ArrayList<App> = AppManager(context).getInstalledAppList()
+    var apps: List<App> = emptyList()
 
 
     Column(
@@ -65,7 +63,14 @@ fun AppsScreen(navHostController: NavHostController) {
             item {
                 ToolbarScreen(navHostController, title = "All your application")
             }
+            appViewModel.state.value.apps.let {
+                apps = it
+            }
+
+
             items(apps) { app ->
+
+                Log.d("mlog", "ppp: ${app.name}");
                 ItemScreen(app, navHostController)
                 Divider(
                     Modifier
@@ -76,68 +81,44 @@ fun AppsScreen(navHostController: NavHostController) {
 
 
         }
+
+
     }
 
 }
 
 @Composable
 fun ItemScreen(app: App, navHostController: NavHostController) {
-    Column(
-        Modifier
+
+    Row(
+        modifier = Modifier
             .fillMaxWidth()
             .height(100.dp)
             .clickable { onItemClick(app.packageName, navHostController) },
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        AsyncImage(
+            model = app.icon,
+            placeholder = painterResource(id = R.drawable.ic_app_place_holder),
+            contentScale = ContentScale.Crop,
+            contentDescription = null,
 
-        ) {
-        Row(
             modifier = Modifier
-                .fillMaxSize(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            AsyncImage(
-                model = app.icon,
-                placeholder = painterResource(id = R.drawable.ic_app_place_holder),
-                contentScale = ContentScale.Crop,
-                contentDescription = null,
-
-                modifier = Modifier
-                    .size(60.dp)
-                    .align(alignment = Alignment.CenterVertically)
-            )
-            ConstraintLayout(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .padding(start = 8.dp)
-            ) {
-                val (button, text) = createRefs()
-                Text(
-                    text = app.name,
-                    textAlign = TextAlign.Start,
-                    modifier = Modifier
-                        .constrainAs(button) {
-                            top.linkTo(parent.top)
-                            bottom.linkTo(parent.bottom)
-                        },
-                    color = FirstTextColor,
-                    maxLines = 1,
-                    fontWeight = FontWeight.SemiBold
-                )
-                Text(
-                    text = app.installedDate, textAlign = TextAlign.End,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .constrainAs(text) {
-                            bottom.linkTo(parent.bottom)
-                            top.linkTo(button.bottom)
-                        }
-                        .padding(6.dp), color = SecondTextColor
-                )
-            }
-
-
-        }
-
+                .size(60.dp)
+                .padding(8.dp)
+                .align(alignment = Alignment.CenterVertically)
+        )
+        Text(
+            text = app.name,
+            textAlign = TextAlign.Start,
+            modifier = Modifier.weight(1f).padding(8.dp),
+            color = FirstTextColor,
+            maxLines = 1,
+            fontWeight = FontWeight.SemiBold
+        )
     }
+
 
 }
 

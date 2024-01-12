@@ -45,9 +45,11 @@ fun ToolbarScreen(navHostController: NavHostController, title: String) {
 
             )
         Text(
-            text =title, textAlign = TextAlign.Center, modifier = Modifier.align(
-                Alignment.Center
-            ), color = Color.Gray, fontWeight = FontWeight.Bold
+            text = title,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.align(Alignment.Center),
+            color = Color.Yellow,
+            fontWeight = FontWeight.ExtraBold
         )
     }
 

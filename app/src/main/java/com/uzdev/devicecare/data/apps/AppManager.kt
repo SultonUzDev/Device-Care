@@ -2,16 +2,18 @@ package com.uzdev.devicecare.data.apps
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.LauncherApps
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.os.UserManager
 import com.uzdev.devicecare.data.details.AppInfo
 import com.uzdev.devicecare.domain.model.App
 import com.uzdev.utils.convertLongToTime
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class AppManager(private val context: Context) {
 
-    private val flags = PackageManager.GET_META_DATA or
-            PackageManager.GET_SHARED_LIBRARY_FILES
 
     @SuppressLint("NewApi")
     private val packages =
@@ -31,8 +33,6 @@ class AppManager(private val context: Context) {
                     packageName = packageInfo.applicationInfo.packageName,
                     name = packageInfo.applicationInfo.loadLabel(context.packageManager).toString(),
                     icon = packageInfo.applicationInfo.loadIcon(context.packageManager),
-                    versionName = packageInfo.versionName.toString(),
-                    installedDate = packageInfo.firstInstallTime.convertLongToTime()
                 )
             )
         }
@@ -71,4 +71,38 @@ class AppManager(private val context: Context) {
         }
         return permissions
     }
+
+    fun getAppList(): Flow<List<App>> {
+        val appList: ArrayList<App> = ArrayList()
+        try {
+            val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
+            val launcherApps =
+                context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+
+            for (profile in userManager.userProfiles) {
+                for (app in launcherApps.getActivityList(null, profile)) {
+
+
+                    val packageName = app.applicationInfo.packageName
+                    val appName =
+                        app.label.toString().ifBlank { packageName }
+                    val icon = app.applicationInfo.loadIcon(context.packageManager)
+
+                    appList.add(App(packageName = packageName, name = appName, icon = icon))
+
+                }
+            }
+            appList.sortedBy { it.name.lowercase() }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return flow {
+            emit(appList)
+        }
+
+    }
+
+
 }
