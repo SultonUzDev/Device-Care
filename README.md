@@ -11,8 +11,8 @@
 
 ## Design
 <div style="display:flex;">
-<img src="/img/image1.png" width="30%">
-<img src="/img/image2.png" width="30%">
-<img src="/img/image3.png" width="30%">
-<img src="/img/image4.png" width="30%">
+<img src="/img/image1.png" width="50%">
+<img src="/img/image2.png" width="50%">
+<img src="/img/image3.png" width="50%">
+<img src="/img/image4.png" width="50%">
 </div>
